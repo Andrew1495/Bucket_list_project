@@ -1,4 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    hi
+<ul>
+{% for country in countries %}
+    <li>  {{  country.name  }} {{  country.continent  }}  </li>
+{% endfor %}
+</ul>
 {% endblock content %}
