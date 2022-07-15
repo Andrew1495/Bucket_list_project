@@ -18,7 +18,6 @@ def select_all():
     results = run_sql(sql)
 
     for row in results:
-        breakpoint
         country = Country(row["name"], row["continent"], row["id"])
         countries.append(country)
     return countries

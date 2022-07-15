@@ -13,7 +13,6 @@ CREATE TABLE countries (
 CREATE TABLE cities(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
-    want_to_visit BOOLEAN,
     country_id INT NOT NULL REFERENCES countries(id) ON DELETE CASCADE
 
 );
