@@ -1,0 +1,30 @@
+DROP TABLE IF EXISTS vistited;
+DROP TABLE IF EXISTS cities;
+DROP TABLE IF EXISTS countries;
+DROP TABLE IF EXISTS users;
+
+
+CREATE TABLE countries (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    continent VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE cities(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    want_to_visit BOOLEAN,
+    country_id INT NOT NULL REFERENCES countries(id) ON DELETE CASCADE
+
+);
+
+CREATE TABLE users(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+CREATE TABLE vistited (
+    id SERIAL PRIMARY KEY,
+    city_id INT NOT NULL REFERENCES cities(id) ON DELETE CASCADE,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
