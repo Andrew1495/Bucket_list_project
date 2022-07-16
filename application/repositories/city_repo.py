@@ -51,6 +51,6 @@ def delete(id):
 
 
 def update(city):
-    sql = "UPDATE city SET (name, zombie_type_id) = (%s, %s) WHERE id = %s"
+    sql = "UPDATE city SET (name, country_id) = (%s, %s) WHERE id = %s"
     values = [city.name, city.country.id, city.id]
     run_sql(sql, values)

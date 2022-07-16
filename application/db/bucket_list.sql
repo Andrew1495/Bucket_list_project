@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS want_to_visit
 DROP TABLE IF EXISTS vistited;
 DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS countries;
@@ -23,6 +24,11 @@ CREATE TABLE users(
 );
 
 CREATE TABLE vistited (
+    id SERIAL PRIMARY KEY,
+    city_id INT NOT NULL REFERENCES cities(id) ON DELETE CASCADE,
+    user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+);
+CREATE TABLE want_to_visit (
     id SERIAL PRIMARY KEY,
     city_id INT NOT NULL REFERENCES cities(id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
