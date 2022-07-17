@@ -1,8 +1,12 @@
 from flask import Flask, redirect, render_template, Blueprint, request
 from controllers.countries_controller import countries
 from models.city import City
+from models.want_to_visit import WantToVisit
 import repositories.country_repo as country_repo
 import repositories.city_repo as city_repo
+import repositories.want_to_visit_repo as want_to_visit_repo
+import repositories.user_repo as user_repo
+
 from flask import Blueprint
 
 cities_blueprint = Blueprint("cities", __name__)
@@ -51,3 +55,10 @@ def create():
     city_repo.save(city)
     return redirect("/cities")
 
+@cities_blueprint.route("/bucket_list/<id>", methods=["GET", "POST"])
+def add_city_to_bucket_list(id,user_id = 1):
+    city = city_repo.select(id)
+    user = user_repo.select(user_id)
+    want_to_visit = WantToVisit(user, city)
+    want_to_visit_repo.save(want_to_visit)
+    return redirect("/cities")

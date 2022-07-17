@@ -15,3 +15,5 @@ def users():
 def user(id):
     user = user_repo.select(id)
     return render_template("users/user.html", user=user)
+
+

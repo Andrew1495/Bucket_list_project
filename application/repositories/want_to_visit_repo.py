@@ -10,7 +10,7 @@ from models.want_to_visit import WantToVisit
 
 
 def save(want_to_visit):
-    sql = "INSERT INTO want_to_visit (user_id, city_id) VALUES (%s, %s) RETURNING id"
+    sql = "INSERT INTO want_to_visit (user_id, city_id) VALUES (%s, %s) RETURNING *"
     values = [want_to_visit.user.id , want_to_visit.city.id]
     results = run_sql(sql, values)
     id = results[0]['id']

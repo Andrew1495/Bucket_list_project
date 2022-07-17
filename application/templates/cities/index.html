@@ -4,7 +4,7 @@
 {% for city in cities %}
     <li> <a href="/cities/{{ city.id }}">{{ city.name  }}</a> 
         <a href=""><button>Visted</button></a>
-        <a href=""><button>Add to Bucket List</button></a>
+        <form action="/cities" methods="post"></form><a href="/bucket_list/{{city.id}}"><button>Add to Bucket List</button></a></form>
 
     </li>
 {% endfor %}
