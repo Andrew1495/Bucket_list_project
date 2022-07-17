@@ -54,3 +54,15 @@ def update(city):
     sql = "UPDATE city SET (name, country_id) = (%s, %s) WHERE id = %s"
     values = [city.name, city.country.id, city.id]
     run_sql(sql, values)
+
+
+def select_city_by_country(id):
+    cities = []
+    sql = "SELECT * FROM cities WHERE country_id = %s" 
+    values = [id]
+    country = country_repo.select(id)
+    results = run_sql(sql, values)
+    for result in results:
+        city = City(result["name"], country, result["id"])
+        cities.append(city)
+    return cities

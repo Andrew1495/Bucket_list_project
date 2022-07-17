@@ -3,3 +3,5 @@ class User:
         self.name = _name
         self.id = id
         
+
+def set_current_user(self, input)

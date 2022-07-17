@@ -2,7 +2,10 @@
 {% block content %}
 <ul>
 {% for country in countries %}
-    <li>  {{  country.name  }} {{  country.continent  }}  </li>
+    <li> <a href="/countries/{{ country.id }}/cities">{{  country.name  }}</a>
+{{  country.continent  }}  </li>
 {% endfor %}
 </ul>
 {% endblock content %}
+
+
