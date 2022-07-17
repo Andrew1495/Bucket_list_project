@@ -11,7 +11,7 @@ import repositories.user_repo as user_repo
 
 
 def save(visit):
-    sql = "INSERT INTO visited (user_id, country_id) VALUES (%s, %s) RETURNING id"
+    sql = "INSERT INTO vistited (user_id, city_id) VALUES (%s, %s) RETURNING id"
     values = [visit.user.id , visit.city.id]
     results = run_sql(sql, values)
     id = results[0]['id']
@@ -20,10 +20,10 @@ def save(visit):
 
 def select_all():
     visited = []
-    sql = "SELECT * FROM visited"
+    sql = "SELECT * FROM vistited"
     results = run_sql(sql)
     for result in results:
-        city = city_repo.select(result["country_id"])
+        city = city_repo.select(result["city_id"])
         user = user_repo.select(result["user_id"])
         visit = Vist(user, city)
         visit.append(visit)
@@ -33,29 +33,29 @@ def select_all():
 
 
 def select(id):
-    sql = "SELECT * FROM visited WHERE id = %s"
+    sql = "SELECT * FROM vistited WHERE id = %s"
     values = [id]
     results = run_sql(sql, values)
 
     if results:
         result = results[0]
-        city = city_repo.select(result["country_id"])
+        city = city_repo.select(result["city_id"])
         user = user_repo.select(result["user_id"])
         visit = Vist(user, city)
     return visit
 
 def delete_all():
-    sql = "DELETE FROM visited"
+    sql = "DELETE FROM vistited"
     run_sql(sql)
 
 
 def delete(id):
-    sql = "DELETE FROM visited WHERE id = %s"
+    sql = "DELETE FROM vistited WHERE id = %s"
     values = [id]
     run_sql(sql, values)
 
 
 def update(visit):
-    sql = "UPDATE visted SET (user_id, city_id) = (%s, %s) WHERE id = %s"
+    sql = "UPDATE vistited SET (user_id, city_id) = (%s, %s) WHERE id = %s"
     values = [visit.user.id, visit.city.id, visit.id]
     run_sql(sql, values)

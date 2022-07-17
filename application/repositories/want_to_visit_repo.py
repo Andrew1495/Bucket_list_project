@@ -10,7 +10,7 @@ from models.want_to_visit import WantToVisit
 
 
 def save(want_to_visit):
-    sql = "INSERT INTO want_to_visit (user_id, country_id) VALUES (%s, %s) RETURNING id"
+    sql = "INSERT INTO want_to_visit (user_id, city_id) VALUES (%s, %s) RETURNING id"
     values = [want_to_visit.user.id , want_to_visit.city.id]
     results = run_sql(sql, values)
     id = results[0]['id']
@@ -22,7 +22,7 @@ def select_all():
     sql = "SELECT * FROM want_to_visit"
     results = run_sql(sql)
     for result in results:
-        city = city_repo.select(result["country_id"])
+        city = city_repo.select(result["city_id"])
         user = user_repo.select(result["user_id"])
         want_to_visit = WantToVisit(user, city)
         want_to_visits.append(want_to_visit)
@@ -36,7 +36,7 @@ def select(id):
 
     if results:
         result = results[0]
-        city = city_repo.select(result["country_id"])
+        city = city_repo.select(result["city_id"])
         user = user_repo.select(result["user_id"])
         want_to_visit = WantToVisit(user, city)
     return want_to_visit
