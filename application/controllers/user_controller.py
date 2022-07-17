@@ -7,6 +7,11 @@ user_blueprint = Blueprint("user", __name__)
 
 
 @user_blueprint.route("/users")
-def user():
+def users():
     users = user_repo.select_all()
-    return render_template("user/index.html", users=users)
+    return render_template("users/index.html", users=users)
+
+@user_blueprint.route("/users/<id>")
+def user(id):
+    user = user_repo.select(id)
+    return render_template("users/user.html", user=user)
