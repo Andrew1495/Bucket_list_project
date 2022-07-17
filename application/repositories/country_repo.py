@@ -13,7 +13,6 @@ def save(country):
 
 def select_all():
     countries = []
-
     sql = "SELECT * FROM countries"
     results = run_sql(sql)
 

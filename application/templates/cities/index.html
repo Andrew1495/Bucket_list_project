@@ -2,7 +2,14 @@
 {% block content %}
 <ul>
 {% for city in cities %}
-    <li>  {{  city.name  }} </li>
+    <li> <a href="/cities/{{ city.id }}">{{ city.name  }}</a> 
+        <a href=""><button>Visted</button></a>
+        <a href=""><button>Add to Bucket List</button></a>
+
+    </li>
 {% endfor %}
 </ul>
+
+<a href="/cities/new"><button>Add a new city</button></a>
+
 {% endblock content %}

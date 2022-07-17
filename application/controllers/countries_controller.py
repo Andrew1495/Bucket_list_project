@@ -14,3 +14,4 @@ def countries():
 def cities_by_country_id(id):
     cities = city_repo.select_city_by_country(id)
     return render_template("cities/index.html", cities=cities)
+
