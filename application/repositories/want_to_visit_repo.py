@@ -24,7 +24,7 @@ def select_all():
     for result in results:
         city = city_repo.select(result["city_id"])
         user = user_repo.select(result["user_id"])
-        want_to_visit = WantToVisit(user, city)
+        want_to_visit = WantToVisit(user, city, result["id"])
         want_to_visits.append(want_to_visit)
     return want_to_visits
 
@@ -38,7 +38,7 @@ def select(id):
         result = results[0]
         city = city_repo.select(result["city_id"])
         user = user_repo.select(result["user_id"])
-        want_to_visit = WantToVisit(user, city)
+        want_to_visit = WantToVisit(user, city, result["id"]) 
     return want_to_visit
 
 def delete_all():

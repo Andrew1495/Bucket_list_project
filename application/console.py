@@ -54,5 +54,9 @@ want_to_visit_1 = WantToVisit(user_1, city_2)
 visit_repo.save(visited_1)
 want_to_visit_repo.save(want_to_visit_1)
 
+bucket = want_to_visit_repo.select(1)
+
+print(bucket.__dict__)
+
 
 
