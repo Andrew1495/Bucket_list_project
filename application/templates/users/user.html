@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>{{user.name}}</h2>
-
-    
+<ul>
+    {% for want_to_visit in bucket_list %}
+        <li>
+            <p>{{want_to_visit.city.name}}, {{want_to_visit.city.country.name}}
+            </p>
+        </li>
+    {% endfor %}
+</ul>    
 {% endblock content %}
