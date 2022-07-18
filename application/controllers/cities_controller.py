@@ -40,9 +40,10 @@ def update(id):
     country = country_repo.select(country_id)
     city = City(city_name, country, id)
     error =city_repo.update(city)
-    if error == True
-    return redirect(f"/cities/{id}")
-
+    if error != True:
+        return redirect(f"/cities/{id}")
+    else:
+        return render_template("/cities/error.html")
 
 @cities_blueprint.route("/cities/new")
 def new():
