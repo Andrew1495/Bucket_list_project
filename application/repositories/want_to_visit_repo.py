@@ -10,11 +10,18 @@ from models.want_to_visit import WantToVisit
 
 
 def save(want_to_visit):
-    sql = "INSERT INTO want_to_visit (user_id, city_id) VALUES (%s, %s) RETURNING *"
-    values = [want_to_visit.user.id , want_to_visit.city.id]
-    results = run_sql(sql, values)
-    id = results[0]['id']
-    want_to_visit.id = id
+    sql = "SELECT * FROM want_to_visit WHERE user_id = %s AND city_id = %s"
+    values = [want_to_visit.user.id, want_to_visit.city.id]
+    test = run_sql(sql, values)
+    error = True
+    if len(test) > 0:
+        return error
+    else:
+        sql = "INSERT INTO want_to_visit (user_id, city_id) VALUES (%s, %s) RETURNING *"
+        values = [want_to_visit.user.id , want_to_visit.city.id]
+        results = run_sql(sql, values)
+        id = results[0]['id']
+        want_to_visit.id = id
 
 
 def select_all():

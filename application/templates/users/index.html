@@ -1,13 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
 <h2>{{user.name}}</h2>
+
+<p>Bucket List:</p>
 <ul>
     {% for want_to_visit in bucket_list %}
         <li>
             <p>{{want_to_visit.city.name}}, {{want_to_visit.city.country.name}}</p>
-            <form action="/user/{{want_to_visit.id}}/delete" method="post"> <button>Remove</button> </form>
+            <form action="/user/{{want_to_visit.id}}/delete_bucket" method="post"> <button>Remove</button> </form>
         </li>
 
     {% endfor %}
-</ul>    
+</ul> 
+    <p>Visted:</p>
+<ul>
+    {% for visit in visited %}
+    <li>
+        <p>{{visit.city.name}}, {{visit.city.country.name}}</p>
+        <form action="/user/{{visit.id}}/delete_visit" method="post"> <button>Remove</button> </form>
+    </li>
+    {% endfor %}
+</ul>
+    
+
 {% endblock content %}

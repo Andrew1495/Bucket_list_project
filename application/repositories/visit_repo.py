@@ -1,4 +1,3 @@
-from itertools import count
 from db.run_sql import run_sql
 from models.country import Country
 from models.user import User
@@ -9,13 +8,26 @@ import repositories.user_repo as user_repo
 
 
 
-
+    # FIRST QUERY THE USERS TABLE FOR AN EXISTING VISIT AT THAT LOVATION.
+    # IF LENGTH OF RESULT > 0
+    # RETURN "YOUVE ALRREADY BEEN THERE"
 def save(visit):
-    sql = "INSERT INTO vistited (user_id, city_id) VALUES (%s, %s) RETURNING id"
-    values = [visit.user.id , visit.city.id]
-    results = run_sql(sql, values)
-    id = results[0]['id']
-    visit.id = id
+    sql = "SELECT * FROM vistited WHERE user_id = %s AND city_id = %s"
+    values = [visit.user.id, visit.city.id]
+    test = run_sql(sql, values)
+    error = True
+    if len(test) > 0:
+        return error
+    else:
+        error = False
+        sql = "INSERT INTO vistited (user_id, city_id) VALUES (%s, %s) RETURNING id"
+        values = [visit.user.id , visit.city.id]
+        results = run_sql(sql, values)
+        id = results[0]['id']
+        visit.id = id
+        return error
+
+
 
 
 def select_all():
@@ -25,8 +37,8 @@ def select_all():
     for result in results:
         city = city_repo.select(result["city_id"])
         user = user_repo.select(result["user_id"])
-        visit = Vist(user, city)
-        visit.append(visit)
+        visit = Vist(user, city, result["id"])
+        visited.append(visit)
     return visited
 
 
@@ -41,7 +53,7 @@ def select(id):
         result = results[0]
         city = city_repo.select(result["city_id"])
         user = user_repo.select(result["user_id"])
-        visit = Vist(user, city)
+        visit = Vist(user, city, result["id"])
     return visit
 
 def delete_all():

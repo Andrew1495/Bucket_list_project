@@ -6,6 +6,8 @@ import repositories.country_repo as country_repo
 import repositories.city_repo as city_repo
 import repositories.want_to_visit_repo as want_to_visit_repo
 import repositories.user_repo as user_repo
+import repositories.visit_repo as visit_repo
+from models.visit import Vist
 
 from flask import Blueprint
 
@@ -37,7 +39,8 @@ def update(id):
     city_name = request.form["city.name"]
     country = country_repo.select(country_id)
     city = City(city_name, country, id)
-    city_repo.update(city)
+    error =city_repo.update(city)
+    if error == True
     return redirect(f"/cities/{id}")
 
 
@@ -60,5 +63,25 @@ def add_city_to_bucket_list(id,user_id = 1):
     city = city_repo.select(id)
     user = user_repo.select(user_id)
     want_to_visit = WantToVisit(user, city)
-    want_to_visit_repo.save(want_to_visit)
+    error = want_to_visit_repo.save(want_to_visit)
+    if error != True:
+        return redirect("/cities")
+    else:
+        return render_template("cities/error.html")
+
+
+@cities_blueprint.route("/visited/<id>", methods=["GET", "POST"])
+def add_city_to_visited(id,user_id = 1):
+    city = city_repo.select(id)
+    user = user_repo.select(user_id)
+    visit = Vist(user, city)
+    error = visit_repo.save(visit)
+    if error != True:
+        return redirect("/cities")
+    else:
+        return render_template("cities/error.html")
+
+@cities_blueprint.route("/cities/<id>/delete", methods=["GET", "POST"])
+def delete_city(id):
+    city_repo.delete(id)
     return redirect("/cities")

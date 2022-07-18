@@ -7,11 +7,19 @@ import repositories.country_repo as country_repo
 
 
 def save(city):
-    sql = "INSERT INTO cities (name, country_id) VALUES (%s , %s) RETURNING * "
-    values = [city.name, city.country.id]
-    results = run_sql(sql, values)
-    id = results[0]['id']
-    city.id = id
+    sql = "SELECT * FROM cities WHERE name = %s"
+    values = [city.name]
+    test = run_sql(sql, values)
+    error = True
+    if len(test) > 0:
+        return error
+    else:
+        sql = "INSERT INTO cities (name, country_id) VALUES (%s , %s) RETURNING * "
+        values = [city.name, city.country.id]
+        results = run_sql(sql, values)
+        id = results[0]['id']
+        city.id = id
+        return error
 
 
 def select_all():
@@ -49,11 +57,26 @@ def delete(id):
 
 
 def update(city):
-    sql = "UPDATE cities SET (name, country_id) = (%s, %s) WHERE id = %s"
-    values = [city.name, city.country.id, city.id]
-    run_sql(sql, values)
+    sql = "SELECT * FROM cities WHERE name = %s"
+    values = [city.name]
+    test = run_sql(sql, values)
+    error = True
+    if len(test) > 0:
+        return error
+    else:
+        sql = "UPDATE cities SET (name, country_id) = (%s, %s) WHERE id = %s"
+        values = [city.name, city.country.id, city.id]
+        run_sql(sql, values)
+        return error
 
 
+
+    sql = "SELECT * FROM vistited WHERE user_id = %s AND city_id = %s"
+    values = [visit.user.id, visit.city.id]
+    test = run_sql(sql, values)
+    error = True
+    if len(test) > 0:
+        return error
 
 def select_city_by_country(id):
     cities = []
@@ -65,3 +88,5 @@ def select_city_by_country(id):
         city = City(result["name"], country, result["id"])
         cities.append(city)
     return cities
+
+

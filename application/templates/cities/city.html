@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p>{{  city.name  }}  <a href="/cities/{{ city.id }}/edit">Edit</a></p>
+    <p>{{  city.name  }}  <a href="/cities/{{ city.id }}/edit">Edit</a>
+    <a href="/cities/{{ city.id }}/delete">Remove</a></p>
 {% endblock content %}

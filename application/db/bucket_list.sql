@@ -7,13 +7,13 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE countries (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
     continent VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE cities(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
+    name VARCHAR(255) UNIQUE,
     country_id INT NOT NULL REFERENCES countries(id) ON DELETE CASCADE
 
 );
@@ -25,11 +25,13 @@ CREATE TABLE users(
 
 CREATE TABLE vistited (
     id SERIAL PRIMARY KEY,
-    city_id INT NOT NULL REFERENCES cities(id) ON DELETE CASCADE,
+    city_id INT NOT NULL REFERENCES cities(id) ON DELETE CASCADE UNIQUE,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+    UNIQUE(city_id, user_id)
 );
 CREATE TABLE want_to_visit (
     id SERIAL PRIMARY KEY,
     city_id INT NOT NULL REFERENCES cities(id) ON DELETE CASCADE,
     user_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
+    UNIQUE(city_id, user_id)
 );
