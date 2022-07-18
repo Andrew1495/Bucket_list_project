@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<ul>
-{% for country in countries %}
-    <li> <a href="/countries/{{ country.id }}/cities">{{  country.name  }}</a>
-{{  country.continent  }}  </li>
-{% endfor %}
-</ul>
+
+    <div class="content">
+    {% for country in countries %}
+
+        <div class="wrapper">
+            <a class href="/countries/{{ country.id }}/cities"> <h3>{{ country.name}}, {{  country.continent  }} </h3></a> 
+        </div>
+    {% endfor %}
+    </div>
 {% endblock content %}
-
-

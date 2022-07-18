@@ -1,15 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-<ul>
-{% for city in cities %}
-    <li> <a href="/cities/{{ city.id }}">{{ city.name  }}</a> 
-        <form action="/cities" methods="post"></form><a href="/visited/{{city.id}}"><button>Visited</button></a></form>
-        <form action="/cities" methods="post"></form><a href="/bucket_list/{{city.id}}"><button>Add to Bucket List</button><a></form>
+    <div class="content">
+    {% for city in cities %}
 
-    </li>
-{% endfor %}
-</ul>
+        <div class="wrapper">
+            <a class href="/cities/{{ city.id }}"> <h3>{{ city.name}}, {{city.country.name}}</h3></a> 
+            <h4>Top Attractions:</h4>
+            <div class="list">
+                <p>{{ city.attraction_1 }}</p>
+                <p>{{ city.attraction_2 }}</p>
+                <p>{{ city.attraction_3 }}</p>
+            </div>
+            <div class="visit_bucket">
+                <form action="/cities" methods="post"></form><a href="/visited/{{city.id}}"><button>Visited</button></a></form>
+                <form action="/cities" methods="post"></form><a href="/bucket_list/{{city.id}}"><button>Add to Bucket List</button><a></form>
+            </div>
+        </div>
 
-<a href="/cities/new"><button>Add a new city</button></a>
-
+    {% endfor %}
+    </div>
+        <a   class="create_new" href="/cities/new"><button>Add a new city</button></a>
 {% endblock content %}

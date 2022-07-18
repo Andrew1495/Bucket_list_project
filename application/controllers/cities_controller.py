@@ -15,7 +15,7 @@ cities_blueprint = Blueprint("cities", __name__)
 # show all citys
 @cities_blueprint.route("/cities")
 def cities():
-    cities = city_repo.select_all()
+    cities = city_repo.displaying_cities()
     return render_template("cities/index.html", cities=cities)
 
 # show single city
@@ -37,13 +37,14 @@ def edit(id):
 def update(id):
     country_id = request.form["country_id"]
     city_name = request.form["city.name"]
+    city_attraction_1 = request.form["city.attraction_1"]
+    city_attraction_2 = request.form["city.attraction_2"]
+    city_attraction_3 = request.form["city.attraction_3"]
     country = country_repo.select(country_id)
-    city = City(city_name, country, id)
-    error =city_repo.update(city)
-    if error != True:
-        return redirect(f"/cities/{id}")
-    else:
-        return render_template("/cities/error.html")
+    city = City(city_name, country, city_attraction_1, city_attraction_2, city_attraction_3, id)
+    city_repo.update(city)
+    return redirect(f"/cities/{id}")
+
 
 @cities_blueprint.route("/cities/new")
 def new():

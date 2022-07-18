@@ -5,7 +5,7 @@
     <div>
         <P> {{city.name}}, {{city.country.name}} </P>
         <label for="city.name">City Name:</label>
-        <input type="text" id="name" name="city.name" placeholder="{{city.name}}" value="{{city.name}}" required>
+        <input type="text" id="name" name="city.name" placeholder="{{city.name}}" value="{{city.name}}" readonly required>
         <label for="country">Country:</label>
         <select name="country_id" id="country">
             {% for country in countries %}
@@ -17,6 +17,25 @@
                 </option>
             {% endfor %}
         </select>
+        <p>Top Attractions</p>
+        <ul>
+            <li> 
+                <label for="city.attraction_1">Attraction 1:</label>
+                <input type="text" id="attraction_1" name="city.attraction_1" placeholder="{{city.attraction_1}}" value="{{city.attraction_1}}" required>
+            </li>
+
+            <li>
+                <label for="city.attraction_2">Attraction 2:</label>
+                <input type="text" id="attraction_2" name="city.attraction_2" placeholder="{{city.attraction_2}}" value="{{city.attraction_2}}" required>
+            </li>
+
+            <li>
+                <label for="city.attraction_3">Attraction 3:</label>
+                <input type="text" id="attraction_3" name="city.attraction_3" placeholder="{{city.attraction_3}}" value="{{city.attraction_3}}" required>
+            </li>
+        </ul>
+
+
     </div>
     <div>
         <input type="submit">

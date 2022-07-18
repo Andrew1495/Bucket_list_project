@@ -41,4 +41,116 @@ body{
 
 .main {
     margin-top: 100px;
+    display: flex;
+    flex-direction: column;
 }
+
+.content{
+    display: flex;
+    flex-wrap:wrap;
+    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.wrapper{
+    padding: 1rem;
+    margin: 1rem;
+    border-width: 0.2rem;
+    border-style: solid;
+    border-color: black;
+    border-radius: 1rem;
+    width: 30%;
+    height: 100%;
+}
+
+.wrapper > a{
+    text-decoration: none;
+    color: black ;
+    text-align: center;
+}
+
+.wrapper > a:hover{
+    text-decoration: underline;
+    color: black ;
+
+    
+}
+
+.list{
+    margin: 0px;
+    padding: 0px;
+    display:flex ;
+    flex-direction: column;
+    text-align: center;
+}
+
+.create_new{
+    align-self: center;
+    justify-self: center;
+    margin: 2rem
+}
+
+.visit_bucket{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+button{
+    height: 3rem;
+    width: 7rem;
+    background-color: #fff;
+    border-color: #000000;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+button:hover{
+    height: 4rem;
+    width: 8rem;
+    background-color: #fff;
+    border-color: #000000;
+    text-decoration: underline;
+
+}
+
+
+.profile_title{
+    text-align: center;
+    background-color: #fff;
+    border-top-style: solid;
+    border-bottom: solid;
+    border-width: 0.2rem;
+    border-color: black;
+    padding: 1rem;
+}
+
+
+footer{
+    display: flex;
+    background-color: #fff;
+    border-top-style: solid;
+    border-bottom: solid;
+    border-width: 0.2rem;
+    border-color: black;
+    text-decoration: none;
+    justify-content: center;
+    align-content: center;
+    padding: 1rem;
+
+}
+footer >a{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.513);
+    font-size: 1.3rem;
+}
+
+footer >a:hover{
+    text-decoration: underline;
+    color: black;
+}
+

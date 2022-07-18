@@ -1,5 +1,20 @@
+
 {% extends 'base.html' %}
 {% block content %}
-    <p>{{  city.name  }}  <a href="/cities/{{ city.id }}/edit">Edit</a>
-    <a href="/cities/{{ city.id }}/delete">Remove</a></p>
+    <div class="content">
+        <div class="wrapper">
+            <h3>{{ city.name}}, {{city.country.name}}</h3>
+            <h4>Top Attractions:</h4>
+            <div class="list">
+                <p>{{ city.attraction_1 }}</p>
+                <p>{{ city.attraction_2 }}</p>
+                <p>{{ city.attraction_3 }}</p>
+            </div>
+            <div class="visit_bucket">
+                <a href="/cities/{{ city.id }}/edit"> <button>Edit</button></a>
+                <a href="/cities/{{ city.id }}/delete"><button>Remove</button></a></p>
+            </div>
+        </div>
+    </div>
+
 {% endblock content %}
