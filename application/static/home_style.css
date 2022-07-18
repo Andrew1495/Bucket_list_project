@@ -1,0 +1,15 @@
+body, html {
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+  }
+
+ .bg{
+    background-image: url(/static/img/homepage_main.jpg);
+    height: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+
