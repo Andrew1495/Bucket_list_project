@@ -87,3 +87,5 @@ def add_city_to_visited(id,user_id = 1):
 def delete_city(id):
     city_repo.delete(id)
     return redirect("/cities")
+
+
