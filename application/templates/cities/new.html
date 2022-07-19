@@ -1,22 +1,41 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="/cities" method="POST">
-    <div>
-        <label for="city.name">City Name:</label>
-        <input type="text" id="name" name="city.name"  placeholder="City Name"  required>
-        <label for="country">Country:</label>
-        <select name="country_id" id="country">
-            {% for country in countries %}
+    
+<div class="content">
+    <div class="wrapper">
+    <form action="/cities" method="POST">
+            <label for="city.name">City Name:</label>
+            <input type="text" id="name" name="city.name" placeholder="City Name" required><br>
+            <label for="country">Country:</label>
+            <select name="country_id" id="country">
+                {% for country in countries %}
                 <option value="{{country.id}}">
                     {{ country.name}}
                 </option>
             {% endfor %}
-        </select>
-    </div>
-    <div>
-        <input type="submit">
-    </div>
-</form>
+            </select>
+            <p>Top Attractions</p>
+            <ul>
+                <li> 
+                    <label for="city.attraction_1">Attraction 1:</label>
+                    <input type="text" id="attraction_1" name="city.attraction_1" placeholder="Attraction..." required>
+                </li>
 
-{% endblock content %}  
+                <li>
+                    <label for="city.attraction_2">Attraction 2:</label>
+                    <input type="text" id="attraction_2" name="city.attraction_2" placeholder="Attraction..."  required>
+                </li>
+
+                <li>
+                    <label for="city.attraction_3">Attraction 3:</label>
+                    <input type="text" id="attraction_3" name="city.attraction_3" placeholder="Attraction..."  required>
+                </li>
+            </ul>
+        <div class="submit">
+            <input class ="input_button" type="submit">
+        </div>
+    </form>
+    </div>
+</div>
+{% endblock content %}

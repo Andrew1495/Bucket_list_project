@@ -1,0 +1,17 @@
+
+
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="content">
+    {% for continent in continents %}
+
+        <div class="wrapper">
+            <a class href="/continents/{{continent}}/countries"> <h3>{{continent}}</h3></a> 
+        </div>
+    {% endfor %}
+    <div class="wrapper">
+        <a class href="/continents/antarctica"> <h3>Antarctica</h3></a> 
+    </div>
+    </div>
+{% endblock content %}

@@ -4,7 +4,7 @@ from models.country import Country
 from models.user import User
 from models.city import City
 import repositories.country_repo as country_repo
-
+import random
 
 
 def save(city):
@@ -15,6 +15,7 @@ def save(city):
     if len(test) > 0:
         return error
     else:
+        error = False
         sql = "INSERT INTO cities (name, country_id, attraction_1, attraction_2, attraction_3) VALUES (%s , %s, %s, %s, %s) RETURNING * "
         values = [city.name, city.country.id,city.attraction_1, city.attraction_2, city.attraction_3]
         results = run_sql(sql, values)
@@ -74,9 +75,6 @@ def select_city_by_country(id):
         cities.append(city)
     return cities
 
-
-
-
 def check_bucket_visited(id , city):
         sql_1 = "SELECT * FROM vistited WHERE user_id = %s AND city_id = %s"
         values_1 = [id, city.id]
@@ -100,3 +98,27 @@ def displaying_cities(id=1):
             display_cities.append(city)
     return display_cities
 
+
+
+
+def displaying_cities_by_country(country, id=1):
+    display_cities = []
+    cities = select_city_by_country(country)
+    for city in cities:
+        found = check_bucket_visited(id, city)
+        if found == False:
+            display_cities.append(city)
+    return display_cities
+
+
+
+def random_city(id):
+    random_cities =[]
+    cities = select_all()
+    for city in cities:
+        found = check_bucket_visited(id, city)
+        if found == False:
+            random_cities.append(city)
+    city = random.choice(random_cities)
+    return city
+    

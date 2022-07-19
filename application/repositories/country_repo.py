@@ -47,3 +47,25 @@ def update(country):
     values = [country["name"], country["continent"], country["id"]]
     run_sql(sql, values)
     
+
+def display_contients():
+    continents = []
+    sql = "SELECT DISTINCT continent FROM countries ORDER BY continent ASC"
+    results = run_sql(sql)
+    for row in results:
+        continents.append(row["continent"])
+    return continents
+
+def display_country_by_continent(continent):
+    countries = []
+    sql = "SELECT * FROM countries WHERE continent = %s"
+    values = [continent]
+    results = run_sql(sql, values)
+    for row in results:
+        country = Country(row["name"], row["continent"], row["id"])
+        countries.append(country)
+    return countries
+
+
+
+

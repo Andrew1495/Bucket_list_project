@@ -55,10 +55,16 @@ def new():
 def create():
     country_id = request.form["country_id"]
     city_name = request.form["city.name"]
+    city_attraction_1 = request.form["city.attraction_1"]
+    city_attraction_2 = request.form["city.attraction_2"]
+    city_attraction_3 = request.form["city.attraction_3"]
     country = country_repo.select(country_id)
-    city = City(city_name, country, id)
-    city_repo.save(city)
-    return redirect("/cities")
+    city = City(city_name, country, city_attraction_1, city_attraction_2, city_attraction_3, id)
+    error = city_repo.save(city)
+    if error == True:
+        return render_template("/cities/error.html")
+    else:
+        return redirect("/cities")
 
 @cities_blueprint.route("/bucket_list/<id>", methods=["GET", "POST"])
 def add_city_to_bucket_list(id,user_id = 1):
@@ -89,3 +95,7 @@ def delete_city(id):
     return redirect("/cities")
 
 
+@cities_blueprint.route("/random")
+def random_city(id = 1):
+    city = city_repo.random_city(id)
+    return render_template("/cities/city.html", city=city)
