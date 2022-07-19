@@ -73,12 +73,6 @@ city_repo.save(city_13)
 city_repo.save(city_14)
 city_repo.save(city_15)
 city_repo.save(city_16)
-    
-
-
-
-user_1 = User("Andrew")
-user_repo.save(user_1)
 
 
 

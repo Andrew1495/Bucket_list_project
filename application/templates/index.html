@@ -11,22 +11,18 @@
 <body>
     <div class="container">
         <div>
-            <form action="">
-                <label for="">Username:</label>
-                <input type="text">
+            <form action="/login" method="post">
+                <label for="user.name">Username:</label>
+                <input type="text" id="name" name="user.name" placeholder="username" required>
                 <label for="">Password:</label>
                 <input type="password">
-            </form>
-                <a href="/countries">
                 <button>hit me</button>
-                </a>
-            <a href="/">Forgotten Password</a>
-            <a href="/">Register</a>
+            </form>
         </div>
+            <a href="/register">Register</a>
+        
     </div>
 
-
-    
     </div>
 </body>
 </html>

@@ -63,3 +63,17 @@ def update(want_to_visit):
     sql = "UPDATE want_to_vist SET (user_id, city_id) = (%s, %s) WHERE id = %s"
     values = [want_to_visit.user.id, want_to_visit.city.id, want_to_visit.id]
     run_sql(sql, values)
+
+
+
+def select_by_user_id():
+    want_to_visits = []
+    sql = "SELECT * FROM want_to_visit WHERE user_id = %s"
+    user = user_repo.find_logged_in_user()
+    values = [user.id]
+    results = run_sql(sql, values)
+    for result in results:
+        city = city_repo.select(result["city_id"])
+        want = Vist(user, city, result["id"])
+        want_to_visits.append(want)
+    return want_to_visits

@@ -19,13 +19,11 @@ def save(visit):
     if len(test) > 0:
         return error
     else:
-        error = False
-        sql = "INSERT INTO vistited (user_id, city_id) VALUES (%s, %s) RETURNING id"
-        values = [visit.user.id , visit.city.id]
+        sql = "INSERT INTO vistited (user_id, city_id) VALUES (%s, %s) RETURNING *"
+        values = [visit.user.id ,visit.city.id]
         results = run_sql(sql, values)
         id = results[0]['id']
         visit.id = id
-        return error
 
 
 
@@ -71,3 +69,16 @@ def update(visit):
     sql = "UPDATE vistited SET (user_id, city_id) = (%s, %s) WHERE id = %s"
     values = [visit.user.id, visit.city.id, visit.id]
     run_sql(sql, values)
+
+
+def select_by_user_id():
+    visited = []
+    sql = "SELECT * FROM vistited WHERE user_id = %s"
+    user = user_repo.find_logged_in_user()
+    values = [user.id]
+    results = run_sql(sql, values)
+    for result in results:
+        city = city_repo.select(result["city_id"])
+        visit = Vist(user, city, result["id"])
+        visited.append(visit)
+    return visited

@@ -132,7 +132,9 @@ button:hover, .input_button:hover{
 
 }
 
-
+.logout{
+    margin-left: 1rem;
+}
 .profile_title{
     text-align: center;
     background-color: #fff;

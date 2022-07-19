@@ -4,7 +4,9 @@ from models.country import Country
 from models.user import User
 from models.city import City
 import repositories.country_repo as country_repo
+import repositories.user_repo as user_repo
 import random
+
 
 
 def save(city):
@@ -75,12 +77,12 @@ def select_city_by_country(id):
         cities.append(city)
     return cities
 
-def check_bucket_visited(id , city):
+def check_bucket_visited(user,city):
         sql_1 = "SELECT * FROM vistited WHERE user_id = %s AND city_id = %s"
-        values_1 = [id, city.id]
+        values_1 = [user.id , city.id]
         test_visit = run_sql(sql_1, values_1)
         sql_2 = "SELECT * FROM want_to_visit WHERE user_id = %s AND city_id = %s"
-        values_2 = [id, city.id]
+        values_2 = [user.id , city.id]
         test_bucket = run_sql(sql_2, values_2)
         found = True
         if len(test_visit) > 0 or len(test_bucket) > 0:
@@ -89,11 +91,12 @@ def check_bucket_visited(id , city):
             found = False
             return found
 
-def displaying_cities(id=1):
+def displaying_cities():
+    user = user_repo.find_logged_in_user()
     display_cities = []
     cities = select_all()
     for city in cities:
-        found = check_bucket_visited(id,city)
+        found = check_bucket_visited(user,city)
         if found == False:
             display_cities.append(city)
     return display_cities
@@ -101,22 +104,23 @@ def displaying_cities(id=1):
 
 
 
-def displaying_cities_by_country(country, id=1):
+def displaying_cities_by_country(country, user):
     display_cities = []
     cities = select_city_by_country(country)
     for city in cities:
-        found = check_bucket_visited(id, city)
+        found = check_bucket_visited(user, city)
         if found == False:
             display_cities.append(city)
     return display_cities
 
 
 
-def random_city(id):
+def random_city():
+    user = user_repo.find_logged_in_user()
     random_cities =[]
     cities = select_all()
     for city in cities:
-        found = check_bucket_visited(id, city)
+        found = check_bucket_visited(user.id, city)
         if found == False:
             random_cities.append(city)
     city = random.choice(random_cities)

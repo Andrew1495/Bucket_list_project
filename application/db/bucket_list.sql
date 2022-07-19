@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS want_to_visit
+DROP TABLE IF EXISTS want_to_visit;
 DROP TABLE IF EXISTS vistited;
 DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS countries;
@@ -22,7 +22,8 @@ CREATE TABLE cities(
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
-    name VARCHAR(255)
+    name VARCHAR(255),
+    logged_in BOOLEAN DEFAULT false
 );
 
 CREATE TABLE vistited (

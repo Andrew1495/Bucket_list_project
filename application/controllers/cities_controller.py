@@ -67,9 +67,9 @@ def create():
         return redirect("/cities")
 
 @cities_blueprint.route("/bucket_list/<id>", methods=["GET", "POST"])
-def add_city_to_bucket_list(id,user_id = 1):
+def add_city_to_bucket_list(id):
     city = city_repo.select(id)
-    user = user_repo.select(user_id)
+    user = user_repo.find_logged_in_user()
     want_to_visit = WantToVisit(user, city)
     error = want_to_visit_repo.save(want_to_visit)
     if error != True:
@@ -79,11 +79,12 @@ def add_city_to_bucket_list(id,user_id = 1):
 
 
 @cities_blueprint.route("/visited/<id>", methods=["GET", "POST"])
-def add_city_to_visited(id,user_id = 1):
+def add_city_to_visited(id):
+    user = user_repo.find_logged_in_user()
     city = city_repo.select(id)
-    user = user_repo.select(user_id)
     visit = Vist(user, city)
     error = visit_repo.save(visit)
+
     if error != True:
         return redirect("/cities")
     else:
@@ -96,6 +97,6 @@ def delete_city(id):
 
 
 @cities_blueprint.route("/random")
-def random_city(id = 1):
-    city = city_repo.random_city(id)
+def random_city():
+    city = city_repo.random_city()
     return render_template("/cities/city.html", city=city)

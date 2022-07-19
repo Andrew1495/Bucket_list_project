@@ -1,7 +1,7 @@
 from flask import Flask, render_template, Blueprint
 import repositories.country_repo as country_repo
 import repositories.city_repo as city_repo
-
+import repositories.user_repo as user_repo
 
 countries_blueprint = Blueprint("countries", __name__)
 
@@ -11,8 +11,9 @@ def countries():
     return render_template("countries/index.html", countries=countries)
 
 @countries_blueprint.route("/countries/<id>/cities")
-def cities_by_country_id(id, user_id =1):
-    cities = city_repo.displaying_cities_by_country(id, user_id)
+def cities_by_country_id(id):
+    user = user_repo.find_logged_in_user()
+    cities = city_repo.displaying_cities_by_country(id,user)
     return render_template("cities/index.html", cities=cities)
 
 @countries_blueprint.route("/continents")

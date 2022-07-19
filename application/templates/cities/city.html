@@ -11,6 +11,8 @@
                 <p>{{ city.attraction_3 }}</p>
             </div>
             <div class="visit_bucket">
+                <a href="/visited/{{city.id}}"> <button>Visited</button></a>
+                <a href="/bucket_list/{{city.id}}"> <button>Bucket</button></a>
                 <a href="/cities/{{ city.id }}/edit"> <button>Edit</button></a>
                 <a href="/cities/{{ city.id }}/delete"><button>Remove</button></a>
             </div>

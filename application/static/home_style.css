@@ -88,6 +88,30 @@ p{
     text-align: justify;
 }
 
+
+.logout{
+    margin-left: 1rem;
+}
+
+
+button{
+    max-height: 3rem;
+    max-width: 7rem;
+    background-color: #fff;
+    border-color: #000000;
+    border-radius: 1rem;
+
+
+}
+
+button:hover{
+    height: 4rem;
+    width: 8rem;
+    background-color: #fff;
+    border-color: #000000;
+    text-decoration: underline;
+}
+
 footer{
     margin-top: 100px;
     display: flex;
