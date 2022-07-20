@@ -120,7 +120,7 @@ def random_city():
     random_cities =[]
     cities = select_all()
     for city in cities:
-        found = check_bucket_visited(user.id, city)
+        found = check_bucket_visited(user, city)
         if found == False:
             random_cities.append(city)
     city = random.choice(random_cities)

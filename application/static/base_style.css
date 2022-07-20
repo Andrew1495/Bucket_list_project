@@ -24,6 +24,11 @@ body{
     border-bottom: solid;
     border-width: 0.2rem;
     border-color: black;
+    position: fixed;
+}
+
+.navbar > h1 {
+    margin-left: 1rem;
 }
 
 .navbar a {
@@ -109,7 +114,6 @@ form > ul{
     display: flex;
     align-items: center;
     justify-content: space-around
-
 }
 
 
@@ -119,8 +123,6 @@ button, .input_button{
     background-color: #fff;
     border-color: #000000;
     border-radius: 1rem;
-
-
 }
 
 button:hover, .input_button:hover{
@@ -170,6 +172,9 @@ footer{
     justify-content: center;
     align-content: center;
     padding: 1rem;
+    bottom:0;
+    width: 100%;
+    
 
 }
 footer >a{
@@ -181,6 +186,7 @@ footer >a{
 footer >a:hover{
     text-decoration: underline;
     color: black;
+
 }
 
 

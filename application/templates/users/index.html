@@ -2,7 +2,7 @@
 {% block content %}
 
 
-<h2 class="profile_title">Where {{user.name}} is dying to see:</h2>
+<h2 class="profile_title">Where {{user.name}} is going next:</h2>
 <div class="content">
     {% for want_to_visit in bucket_list %}
 
@@ -23,7 +23,7 @@
     </div>
 </ul> 
 
-    <h2 class="profile_title">Dead and buried:</h2>
+    <h2 class="profile_title">Where {{user.name}}</h2>
 
 <div class="content">
     {% for visit in visited %}
