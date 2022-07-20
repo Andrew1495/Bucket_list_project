@@ -78,3 +78,16 @@ def select_by_user_id():
         want = Vist(user, city, result["id"])
         want_to_visits.append(want)
     return want_to_visits
+
+# selects want_to_visit by city id and user id
+def select_by_user_id_city_id(city_id):
+    want = None
+    sql = "SELECT * FROM want_to_visit WHERE user_id = %s AND city_id = %s"
+    user = user_repo.find_logged_in_user()
+    values = [user.id, city_id]
+    results = run_sql(sql, values)
+    if results:
+        result = results[0]
+        city = city_repo.select(result["city_id"])
+        want = Vist(user, city, result["id"])
+    return want

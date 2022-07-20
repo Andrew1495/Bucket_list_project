@@ -1,12 +1,46 @@
-{% extends 'base.html' %}
-{% block content %}
-    <div class="content">
-        <div class="wrapper">
-            <h3>Error: Please ensure your username is correct</h3>
-            <div class="visit_bucket">
-                <a href="/"><button>Back</button> </a>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='base_style.css') }}">
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="bg"></div>
+    <header class="navbar">
+    
+        <h1>WhereUGO</h1>
+        <nav>
+
+            
+        </nav>
+    </header>
+
+    <div class="main">
+        <div class="content">
+            <div class="wrapper">
+                <h3>Error: Please ensure your username and password is correct</h3>
+                <div class="visit_bucket">
+                    <a href="/"><button>Back</button> </a>
+                </div>
             </div>
+            
         </div>
-        
+
     </div>
-{% endblock content %}
+
+
+
+    <footer>
+        <a href="https://github.com/Andrew1495">@Andrew1495</a>
+
+        <a href="/logout"><button class="logout"> Log Out</button></a>
+    </footer>
+    
+    
+</body>
+</html>

@@ -103,7 +103,7 @@ city_repo.save(city_26)
 
 
 
-user = User("Andrew" , False)
+user = User("Andrew", 123 , False)
 user_repo.save(user)
 
 

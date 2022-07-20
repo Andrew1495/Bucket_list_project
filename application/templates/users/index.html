@@ -16,6 +16,7 @@
             </div>
             <div class="visit_bucket">
                 <form action="/user/{{want_to_visit.id}}/delete_bucket" method="post"> <button>Remove</button> </form>
+                <a href="/bucket_list/{{want_to_visit.id}}/visited"> <button>Visited</button></a>
             </div>
         </div>
 
@@ -23,7 +24,7 @@
     </div>
 </ul> 
 
-    <h2 class="profile_title">Where {{user.name}}</h2>
+    <h2 class="profile_title">Where {{user.name}} has</h2>
 
 <div class="content">
     {% for visit in visited %}

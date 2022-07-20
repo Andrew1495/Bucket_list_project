@@ -90,7 +90,7 @@ def find_logged_in_user():
     results = run_sql(sql)
     if results:
         result = results[0]
-        user = User(result["name"], result["logged_in"],result["id"])
+        user = User(result["name"],result["password"], result["logged_in"],result["id"])
     else:
         user = None
     return user
@@ -107,9 +107,13 @@ def log_out():
 def verify_password(user_name, user_password):
     verified = False
     user_check = select_user_by_name(user_name)
-    if user_password == user_check.password:
+    if user_check == False:
+        return verified
+    elif user_password == user_check.password:
         verified = True
         return verified
     else:
         return verified
+
+
 

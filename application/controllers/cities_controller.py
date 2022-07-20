@@ -89,8 +89,10 @@ def add_city_to_visited(id):
     user = user_repo.find_logged_in_user()
     city = city_repo.select(id)
     visit = Vist(user, city)
+    want_to_visit = want_to_visit_repo.select_by_user_id_city_id(city.id)
+    if want_to_visit != None:
+        want_to_visit_repo.delete(want_to_visit.id)
     error = visit_repo.save(visit)
-
     if error != True:
         return redirect("/cities")
     else:
@@ -110,3 +112,13 @@ def random_city():
         return redirect("/")
     else:
         return render_template("/cities/city.html", city=city)
+
+
+@cities_blueprint.route("/bucket_list/<id>/visited")
+def move_from_bucket_to_visited(id):
+    want_to_visit = want_to_visit_repo.select(id)
+    user = user_repo.select(want_to_visit.user.id)
+    city = city_repo.select(want_to_visit.city.id)
+    want_to_visit_repo.delete(want_to_visit.id)
+    visit_repo.save(want_to_visit)
+    return redirect("/user")
