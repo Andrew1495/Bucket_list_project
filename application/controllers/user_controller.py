@@ -74,6 +74,6 @@ def new_user():
     if complete != False:
         return redirect("/")
     else:
-        return render_template("error.html")
+        return render_template("users/error_register.html")
 
 
