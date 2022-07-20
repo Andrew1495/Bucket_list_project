@@ -91,7 +91,10 @@ def find_logged_in_user():
     if results:
         result = results[0]
         user = User(result["name"], result["logged_in"],result["id"])
+    else:
+        user = None
     return user
+    
 
 # logs out all users
 def log_out():

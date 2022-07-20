@@ -9,6 +9,7 @@ import repositories.user_repo as user_repo
 import repositories.visit_repo as visit_repo
 from models.visit import Vist
 
+
 from flask import Blueprint
 
 cities_blueprint = Blueprint("cities", __name__)
@@ -16,7 +17,10 @@ cities_blueprint = Blueprint("cities", __name__)
 @cities_blueprint.route("/cities")
 def cities():
     cities = city_repo.displaying_cities()
-    return render_template("cities/index.html", cities=cities)
+    if cities == None:
+        return redirect("/")
+    else:
+        return render_template("cities/index.html", cities=cities)
 
 # show single city
 @cities_blueprint.route("/cities/<id>")
@@ -102,4 +106,7 @@ def delete_city(id):
 @cities_blueprint.route("/random")
 def random_city():
     city = city_repo.random_city()
-    return render_template("/cities/city.html", city=city)
+    if city == None:
+        return redirect("/")
+    else:
+        return render_template("/cities/city.html", city=city)

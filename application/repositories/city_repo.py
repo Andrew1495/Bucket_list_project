@@ -1,3 +1,4 @@
+from flask import redirect
 from db.run_sql import run_sql
 from models.city import City
 import repositories.country_repo as country_repo
@@ -94,13 +95,16 @@ def check_bucket_visited(user,city):
 # displays cities that are not on visted or bucket list
 def displaying_cities():
     user = user_repo.find_logged_in_user()
-    display_cities = []
-    cities = select_all()
-    for city in cities:
-        found = check_bucket_visited(user,city)
-        if found == False:
-            display_cities.append(city)
-    return display_cities
+    if user == None:
+        return user
+    else:
+        display_cities = []
+        cities = select_all()
+        for city in cities:
+            found = check_bucket_visited(user,city)
+            if found == False:
+                display_cities.append(city)
+        return display_cities
 
 
 
@@ -120,12 +124,15 @@ def displaying_cities_by_country(country, user):
 # display a  random citiy that is not on visite dor bucket list
 def random_city():
     user = user_repo.find_logged_in_user()
-    random_cities =[]
-    cities = select_all()
-    for city in cities:
-        found = check_bucket_visited(user, city)
-        if found == False:
-            random_cities.append(city)
-    city = random.choice(random_cities)
-    return city
+    if user == None:
+        return user
+    else:
+        random_cities =[]
+        cities = select_all()
+        for city in cities:
+            found = check_bucket_visited(user, city)
+            if found == False:
+                random_cities.append(city)
+        city = random.choice(random_cities)
+        return city
     

@@ -12,9 +12,12 @@ user_blueprint = Blueprint("user", __name__)
 @user_blueprint.route("/user")
 def user():
     user = user_repo.find_logged_in_user()
-    bucket_list = want_to_visit_repo.select_by_user_id()
-    visited = visit_repo.select_by_user_id()
-    return render_template("users/index.html", user=user, bucket_list=bucket_list, visited=visited)
+    if user == None:
+        return redirect("/")
+    else:
+        bucket_list = want_to_visit_repo.select_by_user_id()
+        visited = visit_repo.select_by_user_id()
+        return render_template("users/index.html", user=user, bucket_list=bucket_list, visited=visited)
 
 # deletes item from bucket List
 @user_blueprint.route("/user/<id>/delete_bucket", methods= [ "GET", "POST"])

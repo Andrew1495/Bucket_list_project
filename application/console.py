@@ -1,7 +1,7 @@
-from curses.ascii import US
+
 from models.country import Country
 from models.city import City
-
+from models.user import User
 import repositories.user_repo as user_repo
 import repositories.country_repo as country_repo
 import repositories.city_repo as city_repo
@@ -24,6 +24,11 @@ country_6 = Country("U.S.A", "North America")
 country_7 = Country("Brazil", "South America")
 country_8 = Country("New Zealand", "Oceania")
 country_9 = Country("Nigeria", "Africa")
+country_10 = Country("Chile", "South America")
+country_11 = Country("Italy", "Europe")
+country_12 = Country("France", "Europe")
+country_13 = Country("Canada", "North America")
+
 country_repo.save(country_1)
 country_repo.save(country_2)
 country_repo.save(country_3)
@@ -33,6 +38,10 @@ country_repo.save(country_6)
 country_repo.save(country_7)
 country_repo.save(country_8)
 country_repo.save(country_9)
+country_repo.save(country_10)
+country_repo.save(country_11)
+country_repo.save(country_12)
+country_repo.save(country_13)
 
 
 
@@ -52,6 +61,17 @@ city_13 = City("Auckland", country_8, "SkyTower" , "Auckland Botanic Gardens", "
 city_14 = City("Queenstown", country_8, "Queenstown Hill" , "Lake Wakatipu", "Kiwi Park")
 city_15 = City("Lagos", country_9, "Lekki Conservation Centre" , "Tarkwa Bay Beach", "Freedom Park Lagos")
 city_16 = City("Abuja", country_9, "Jabi Boat Club" , "Abuja National Mosque", "Jabi Lake")
+city_17 = City("Rio de Janeiro", country_7, "Sugarloaf Mountain" , "Corcovado - Christ the Redeemer", "Botanical Garden")
+city_18 = City("São Paulo", country_7, "Parque Ibirapuera" , "Paulista Avenue", "Neo Quimica Arena")
+city_19 = City("Paris", country_12, "Eiffel Tower" , "Sainte-Chapelle", "Cathédrale Notre-Dame de Paris")
+city_20 = City("Nantes", country_12, "Jardin des Plantes" , "Les Machines de L'ile", "Passage Pommeraye")
+city_21 = City("Venice", country_11, "Doge's Palace" , "Basilica di San Marco", "Canal Grande")
+city_22 = City("Rome", country_11, "Colosseum" , "Pantheon", "Roman Forum")
+city_23 = City("Quebec City", country_13, "Old Quebec" , "Parc de la Chute-Montmorency", "Terrasse Dufferin")
+city_24 = City("Toronto", country_13, "St. Lawrence Market" , "Royal Ontario Museum", "Hockey Hall of Fame")
+city_25 = City("Santiago", country_10, "Cerro San Cristobal" , "Sky Costanera", "Cerro Santa Lucia")
+city_26 = City("Valparaíso", country_10, "La Sebastiana" , "Cerro Concepción", "Paseo Gervasoni")
+
 
 
 city_repo.save(city_1)
@@ -70,7 +90,20 @@ city_repo.save(city_13)
 city_repo.save(city_14)
 city_repo.save(city_15)
 city_repo.save(city_16)
+city_repo.save(city_17)
+city_repo.save(city_18)
+city_repo.save(city_19)
+city_repo.save(city_20)
+city_repo.save(city_21)
+city_repo.save(city_22)
+city_repo.save(city_23)
+city_repo.save(city_24)
+city_repo.save(city_25)
+city_repo.save(city_26)
 
 
+
+user = User("Andrew" , False)
+user_repo.save(user)
 
 

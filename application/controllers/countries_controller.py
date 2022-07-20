@@ -1,4 +1,4 @@
-from flask import Flask, render_template, Blueprint
+from flask import Flask, redirect, render_template, Blueprint
 import repositories.country_repo as country_repo
 import repositories.city_repo as city_repo
 import repositories.user_repo as user_repo
@@ -16,8 +16,11 @@ def countries():
 @countries_blueprint.route("/countries/<id>/cities")
 def cities_by_country_id(id):
     user = user_repo.find_logged_in_user()
-    cities = city_repo.displaying_cities_by_country(id,user)
-    return render_template("cities/index.html", cities=cities)
+    if user == None:
+        return redirect("/")
+    else:
+        cities = city_repo.displaying_cities_by_country(id,user)
+        return render_template("cities/index.html", cities=cities)
 
 
 # shows all continents
