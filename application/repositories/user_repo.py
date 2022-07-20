@@ -1,4 +1,5 @@
 
+from operator import truediv
 from db.run_sql import run_sql
 from models.user import User
 
@@ -11,8 +12,8 @@ def save(user):
         new_user = False
         return new_user
     else:
-        sql = "INSERT INTO users (name, logged_in) VALUES  (%s, %s) RETURNING *"
-        values = [user.name, user.logged_in]
+        sql = "INSERT INTO users (name, password, logged_in) VALUES  (%s,%s, %s) RETURNING *"
+        values = [user.name, user.password, user.logged_in]
         results = run_sql(sql, values)
         id = results[0]['id']
         user.id = id
@@ -24,7 +25,7 @@ def select_all():
     results = run_sql(sql)
 
     for row in results:
-        user= User(row["name"],row["logged_in"], row["id"])
+        user= User(row["name"],row["password"], row["logged_in"], row["id"])
         users.append(user)
     return users
 
@@ -37,7 +38,7 @@ def select(id):
     results = run_sql(sql, values)
     if results:
         result = results[0]
-        user = User(result["name"], result["logged_in"],result["id"])
+        user = User(result["name"], result["password"],result["logged_in"],result["id"])
     return user
 
 
@@ -59,6 +60,8 @@ def update(user):
     run_sql(sql, values)
 
 
+
+
 # finds user by name
 def select_user_by_name(name):
     sql = "SELECT * FROM users WHERE name = %s"
@@ -66,7 +69,7 @@ def select_user_by_name(name):
     result = run_sql(sql, values)
     if len(result) != 0:
         result = result[0]
-        user = User(result["name"], result["logged_in"],result["id"])
+        user = User(result["name"], result["password"], result["logged_in"],result["id"])
         return user
     else:
         user = False
@@ -90,7 +93,7 @@ def find_logged_in_user():
     results = run_sql(sql)
     if results:
         result = results[0]
-        user = User(result["name"], result["logged_in"],result["id"])
+        user = User(result["name"],result["password"], result["logged_in"],result["id"])
     return user
 
 # logs out all users
@@ -100,4 +103,13 @@ def log_out():
         user.logged_in = False
         update(user)
 
+# checks password matches input password 
+def verify_password(user_name, user_password):
+    verified = False
+    user_check = select_user_by_name(user_name)
+    if user_password == user_check.password:
+        verified = True
+        return verified
+    else:
+        return verified
 

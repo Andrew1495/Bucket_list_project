@@ -14,15 +14,17 @@ CREATE TABLE countries (
 CREATE TABLE cities(
     id SERIAL PRIMARY KEY,
     country_id INT NOT NULL REFERENCES countries(id) ON DELETE CASCADE,
-    name VARCHAR(255) UNIQUE,
+    name VARCHAR(255),
     attraction_1 VARCHAR(255),
     attraction_2 VARCHAR(255),
-    attraction_3 VARCHAR(255)
+    attraction_3 VARCHAR(255),
+    UNIQUE(name, country_id)
 );
 
 CREATE TABLE users(
     id SERIAL PRIMARY KEY,
     name VARCHAR(255),
+    password VARCHAR(255),
     logged_in BOOLEAN DEFAULT false
 );
 

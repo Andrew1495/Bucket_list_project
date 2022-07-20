@@ -7,8 +7,8 @@ import random
 
 # saves a city
 def save(city):
-    sql = "SELECT * FROM cities WHERE name = %s"
-    values = [city.name]
+    sql = "SELECT * FROM cities WHERE name = %s AND country_id = %s"
+    values = [city.name, city.country.id]
     test = run_sql(sql, values)
     error = True
     if len(test) > 0:

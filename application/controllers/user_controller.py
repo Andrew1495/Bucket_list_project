@@ -34,8 +34,11 @@ def delete_visit(id):
 @user_blueprint.route("/login" , methods=["GET" , "POST"])
 def login():
     user_name = request.form["user.name"]
+    user_password = request.form["user.password"]
     user = user_repo.select_user_by_name(user_name)
-    if user == False:
+    password_check = user_repo.verify_password(user_name,user_password)
+
+    if user == False or password_check == False:
         return render_template("error.html")
     else:
         logged = user_repo.check_logged_in(user)
@@ -62,7 +65,8 @@ def register():
 @user_blueprint.route("/register/new",  methods=["GET" , "POST"])
 def new_user():
     user_name = request.form["user.name"]
-    user = User(user_name, False)
+    user_password= request.form["user.password"]
+    user = User(user_name,user_password, False)
     complete = user_repo.save(user)
     if complete != False:
         return redirect("/")
