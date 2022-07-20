@@ -1,9 +1,6 @@
 from curses.ascii import US
 from models.country import Country
 from models.city import City
-from models.user import User
-from models.visit import Vist
-from models.want_to_visit import WantToVisit
 
 import repositories.user_repo as user_repo
 import repositories.country_repo as country_repo
