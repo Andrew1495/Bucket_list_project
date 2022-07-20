@@ -8,7 +8,7 @@ import repositories.city_repo as city_repo
 import repositories.user_repo as user_repo
 from models.want_to_visit import WantToVisit
 
-
+# saves to  want to visit
 def save(want_to_visit):
     sql = "SELECT * FROM want_to_visit WHERE user_id = %s AND city_id = %s"
     values = [want_to_visit.user.id, want_to_visit.city.id]
@@ -23,7 +23,7 @@ def save(want_to_visit):
         id = results[0]['id']
         want_to_visit.id = id
 
-
+# selects all 
 def select_all():
     want_to_visits = []
     sql = "SELECT * FROM want_to_visit"
@@ -35,7 +35,7 @@ def select_all():
         want_to_visits.append(want_to_visit)
     return want_to_visits
 
-
+# select by id
 def select(id):
     sql = "SELECT * FROM want_to_visit WHERE id = %s"
     values = [id]
@@ -48,24 +48,25 @@ def select(id):
         want_to_visit = WantToVisit(user, city, result["id"]) 
     return want_to_visit
 
+# delete all
 def delete_all():
     sql = "DELETE FROM want_to_visit"
     run_sql(sql)
 
-
+# delete by id
 def delete(id):
     sql = "DELETE FROM want_to_visit WHERE id = %s"
     values = [id]
     run_sql(sql, values)
 
-
+# updates entry in want_to_visit
 def update(want_to_visit):
     sql = "UPDATE want_to_vist SET (user_id, city_id) = (%s, %s) WHERE id = %s"
     values = [want_to_visit.user.id, want_to_visit.city.id, want_to_visit.id]
     run_sql(sql, values)
 
 
-
+# selects want_to_visit by user id
 def select_by_user_id():
     want_to_visits = []
     sql = "SELECT * FROM want_to_visit WHERE user_id = %s"

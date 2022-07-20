@@ -45,12 +45,13 @@ def update(id):
     city_repo.update(city)
     return redirect(f"/cities/{id}")
 
-
+# displays form for entering new city
 @cities_blueprint.route("/cities/new")
 def new():
     countries = country_repo.select_all()
     return render_template("cities/new.html", countries=countries)
 
+# /creates a new city based on form info
 @cities_blueprint.route("/cities", methods = ["POST"])
 def create():
     country_id = request.form["country_id"]
@@ -66,6 +67,7 @@ def create():
     else:
         return redirect("/cities")
 
+# adds a city to a bucket list
 @cities_blueprint.route("/bucket_list/<id>", methods=["GET", "POST"])
 def add_city_to_bucket_list(id):
     city = city_repo.select(id)
@@ -77,7 +79,7 @@ def add_city_to_bucket_list(id):
     else:
         return render_template("cities/error.html")
 
-
+# adds a city to visited
 @cities_blueprint.route("/visited/<id>", methods=["GET", "POST"])
 def add_city_to_visited(id):
     user = user_repo.find_logged_in_user()
@@ -90,12 +92,13 @@ def add_city_to_visited(id):
     else:
         return render_template("cities/error.html")
 
+# deletes city by id
 @cities_blueprint.route("/cities/<id>/delete", methods=["GET", "POST"])
 def delete_city(id):
     city_repo.delete(id)
     return redirect("/cities")
 
-
+# grabs a random city
 @cities_blueprint.route("/random")
 def random_city():
     city = city_repo.random_city()

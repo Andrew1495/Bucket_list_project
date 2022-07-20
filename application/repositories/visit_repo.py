@@ -1,16 +1,11 @@
 from db.run_sql import run_sql
-from models.country import Country
-from models.user import User
-from models.city import City
 from models.visit import Vist
 import repositories.city_repo as city_repo
 import repositories.user_repo as user_repo
 
 
 
-    # FIRST QUERY THE USERS TABLE FOR AN EXISTING VISIT AT THAT LOVATION.
-    # IF LENGTH OF RESULT > 0
-    # RETURN "YOUVE ALRREADY BEEN THERE"
+# Saves a users id and city id as visited
 def save(visit):
     sql = "SELECT * FROM vistited WHERE user_id = %s AND city_id = %s"
     values = [visit.user.id, visit.city.id]
@@ -26,8 +21,7 @@ def save(visit):
         visit.id = id
 
 
-
-
+# selects all from visited
 def select_all():
     visited = []
     sql = "SELECT * FROM vistited"
@@ -41,7 +35,7 @@ def select_all():
 
 
 
-
+# selects visited by id
 def select(id):
     sql = "SELECT * FROM vistited WHERE id = %s"
     values = [id]
@@ -54,23 +48,25 @@ def select(id):
         visit = Vist(user, city, result["id"])
     return visit
 
+
+# deletes all visted
 def delete_all():
     sql = "DELETE FROM vistited"
     run_sql(sql)
 
-
+# deletes visted by id
 def delete(id):
     sql = "DELETE FROM vistited WHERE id = %s"
     values = [id]
     run_sql(sql, values)
 
-
+# updates visited 
 def update(visit):
     sql = "UPDATE vistited SET (user_id, city_id) = (%s, %s) WHERE id = %s"
     values = [visit.user.id, visit.city.id, visit.id]
     run_sql(sql, values)
 
-
+# selects all visited by user id
 def select_by_user_id():
     visited = []
     sql = "SELECT * FROM vistited WHERE user_id = %s"

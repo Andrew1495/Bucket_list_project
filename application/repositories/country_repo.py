@@ -1,9 +1,9 @@
-from itertools import count
 from db.run_sql import run_sql
 from models.country import Country
-from models.user import User
-from models.city import City
 
+
+
+# saves countries
 def save(country):
     sql = "INSERT INTO countries (name, continent) VALUES (%s, %s) RETURNING *"
     values = [country.name, country.continent]
@@ -11,6 +11,7 @@ def save(country):
     id = results[0]['id']
     country.id = id
 
+# selects all countries
 def select_all():
     countries = []
     sql = "SELECT * FROM countries"
@@ -21,6 +22,7 @@ def select_all():
         countries.append(country)
     return countries
 
+# selects country by id
 def select(id):
     country = None
     sql = "SELECT * FROM countries WHERE id = %s"
@@ -31,23 +33,19 @@ def select(id):
         country = Country(result["name"], result["continent"], result["id"])
     return country
 
+# delete all countrys
 def delete_all():
     sql = "DELETE  FROM countries"
     run_sql(sql)
 
-
+# delete country by id
 def delete(id):
     sql = "DELETE  FROM countries WHERE id = %s"
     values = [id]
     run_sql(sql, values)
 
 
-def update(country):
-    sql = "UPDATE tasks SET (description, user_id, duration, completed) = (%s, %s) WHERE id = %s"
-    values = [country["name"], country["continent"], country["id"]]
-    run_sql(sql, values)
-    
-
+# displays countries by contients
 def display_contients():
     continents = []
     sql = "SELECT DISTINCT continent FROM countries ORDER BY continent ASC"
@@ -56,6 +54,8 @@ def display_contients():
         continents.append(row["continent"])
     return continents
 
+
+# displays countries by continent 
 def display_country_by_continent(continent):
     countries = []
     sql = "SELECT * FROM countries WHERE continent = %s"

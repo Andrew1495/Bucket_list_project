@@ -1,10 +1,10 @@
-from itertools import count
 
-from flask import redirect, render_template
 from db.run_sql import run_sql
 from models.user import User
 
 
+
+# saves a new user if name is not found
 def save(user):
     found = select_user_by_name(user.name)
     if found != False:
@@ -17,9 +17,9 @@ def save(user):
         id = results[0]['id']
         user.id = id
 
+# selects all users
 def select_all():
     users = []
-
     sql = "SELECT * FROM users"
     results = run_sql(sql)
 
@@ -28,6 +28,8 @@ def select_all():
         users.append(user)
     return users
 
+
+# select user by id
 def select(id):
     user= None
     sql = "SELECT * FROM users WHERE id = %s"
@@ -38,22 +40,26 @@ def select(id):
         user = User(result["name"], result["logged_in"],result["id"])
     return user
 
+
+# delete all users
 def delete_all():
     sql = "DELETE  FROM users"
     run_sql(sql)
 
-
+# delete user by id
 def delete(id):
     sql = "DELETE  FROM users WHERE id = %s"
     values = [id]
     run_sql(sql, values)
 
-
+# updates user log in 
 def update(user):
     sql = "UPDATE users SET logged_in = %s WHERE id = %s"
     values = [user.logged_in, user.id]
     run_sql(sql, values)
 
+
+# finds user by name
 def select_user_by_name(name):
     sql = "SELECT * FROM users WHERE name = %s"
     values = [name]
@@ -66,7 +72,7 @@ def select_user_by_name(name):
         user = False
         return user
 
-
+# checks to see if a user is currently logged in
 def check_logged_in(user):
     sql = "SELECT * FROM users WHERE name = %s AND logged_in = True"
     values = [user.name]
@@ -78,7 +84,7 @@ def check_logged_in(user):
         logged_in = False
         return logged_in
     
-
+# returns the user who is logged in
 def find_logged_in_user():
     sql = "SELECT * FROM users WHERE logged_in = True"
     results = run_sql(sql)
@@ -87,7 +93,7 @@ def find_logged_in_user():
         user = User(result["name"], result["logged_in"],result["id"])
     return user
 
-
+# logs out all users
 def log_out():
     users = select_all()
     for user in users:
