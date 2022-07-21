@@ -8,7 +8,13 @@ body{
     
 }
 
-
+.pengu{
+    margin-bottom: 1rem;
+    border-width: 0.2rem;
+    border-style: solid;
+    border-color: black;
+    border-radius: 1rem;
+}
 
 .navbar {
     overflow: hidden;

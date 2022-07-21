@@ -71,6 +71,8 @@ city_23 = City("Quebec City", country_13, "Old Quebec" , "Parc de la Chute-Montm
 city_24 = City("Toronto", country_13, "St. Lawrence Market" , "Royal Ontario Museum", "Hockey Hall of Fame")
 city_25 = City("Santiago", country_10, "Cerro San Cristobal" , "Sky Costanera", "Cerro Santa Lucia")
 city_26 = City("Valparaíso", country_10, "La Sebastiana" , "Cerro Concepción", "Paseo Gervasoni")
+city_27 = City("Birmingham", country_6, "Barber Vintage Motorsports Museum" , "Birmingham Civil Rights Institute", "Vulcan Park and Museum")
+city_28 = City("Birmingham", country_2, "Birmingham Back to Backs" , "Birmingham Museum & Art Gallery", "National Motorcycle Museum")
 
 
 
@@ -100,6 +102,8 @@ city_repo.save(city_23)
 city_repo.save(city_24)
 city_repo.save(city_25)
 city_repo.save(city_26)
+city_repo.save(city_27)
+city_repo.save(city_28)
 
 
 
